@@ -17,6 +17,7 @@ import (
 
 var pkg = flag.String("pkg", "", "the package that should be imported, if not provided, the package in the current directory is chosen")
 var fun = flag.String("func", "Main", "the function that should be run")
+var args = flag.String("args", "", "the arguments for the program")
 var gopathForTempfile = ""
 
 var template = `
@@ -56,12 +57,15 @@ func run() {
 		0666)
 	ok(err)
 
-	args := []string{
+	args_ := []string{
 		"run", mainFile,
 	}
 
-	args = append(args, os.Args...)
-	cmd := exec.Command("go", args...)
+	if args != nil && *args != "" {
+		args_ = append(args_, *args)
+	}
+	//args_ = append(args_, os.Args...)
+	cmd := exec.Command("go", args_...)
 	cmd.Env = os.Environ()
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin

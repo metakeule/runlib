@@ -9,10 +9,10 @@ Usage
 use 
 
 ```
-runlib -pkg=github.com/user/package -func=X
+runlib -pkg=github.com/user/package -func=X -args='-x=y'
 ```
 
-to run the following code
+to run the following code with the arguments `-x=y`
 
 ```go
 package main
@@ -24,11 +24,10 @@ func main() {
 }
 ```
 
-or if you are in the directory `$GOPATH/src/github.com/user/package` and want to run the function `Main`, run
+or if you are in the directory `$GOPATH/src/github.com/user/package` and want to run the function `Main` and passing no arguments, run
 
 ```
 runlib
 ```
 
-StdIn, StdErr and StdOut are bound to the ones of the main process and available inside the package, as well as the environment and `os.Args`. 
-The latter includes the arguments needed by runlib: `pkg` and `func`.
+StdIn, StdErr and StdOut are bound to the ones of the main process and available inside the package.
